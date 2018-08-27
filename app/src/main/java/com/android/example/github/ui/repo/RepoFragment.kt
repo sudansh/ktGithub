@@ -17,7 +17,6 @@ import com.android.example.github.databinding.RepoFragmentBinding
 import com.android.example.github.di.Injectable
 import com.android.example.github.ui.common.NavigationController
 import com.android.example.github.ui.common.RetryCallback
-import com.android.example.github.util.autoCleared
 import javax.inject.Inject
 
 /**
@@ -38,9 +37,8 @@ class RepoFragment : Fragment(), Injectable {
 
     // mutable for testing
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-    var binding by autoCleared<RepoFragmentBinding>()
-
-    private var adapter by autoCleared<ContributorAdapter>()
+    lateinit var binding: RepoFragmentBinding
+    lateinit var adapter: ContributorAdapter
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

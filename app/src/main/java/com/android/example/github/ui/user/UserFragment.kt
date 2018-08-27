@@ -18,7 +18,6 @@ import com.android.example.github.di.Injectable
 import com.android.example.github.ui.common.NavigationController
 import com.android.example.github.ui.common.RepoListAdapter
 import com.android.example.github.ui.common.RetryCallback
-import com.android.example.github.util.autoCleared
 import javax.inject.Inject
 
 class UserFragment : Fragment(), Injectable {
@@ -29,11 +28,11 @@ class UserFragment : Fragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    var binding by autoCleared<UserFragmentBinding>()
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     private lateinit var userViewModel: UserViewModel
-    private var adapter by autoCleared<RepoListAdapter>()
+    lateinit var binding: UserFragmentBinding
+    lateinit var adapter: RepoListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

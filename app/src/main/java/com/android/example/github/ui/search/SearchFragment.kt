@@ -26,7 +26,6 @@ import com.android.example.github.di.Injectable
 import com.android.example.github.ui.common.NavigationController
 import com.android.example.github.ui.common.RepoListAdapter
 import com.android.example.github.ui.common.RetryCallback
-import com.android.example.github.util.autoCleared
 import javax.inject.Inject
 
 class SearchFragment : Fragment(), Injectable {
@@ -42,10 +41,8 @@ class SearchFragment : Fragment(), Injectable {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    var binding by autoCleared<SearchFragmentBinding>()
-
-    var adapter by autoCleared<RepoListAdapter>()
-
+    lateinit var binding: SearchFragmentBinding
+    lateinit var adapter: RepoListAdapter
     lateinit var searchViewModel: SearchViewModel
 
     override fun onCreateView(

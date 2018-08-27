@@ -67,8 +67,7 @@ class SearchFragment : Fragment(), Injectable {
         initRecyclerView()
         val rvAdapter = RepoListAdapter(
             dataBindingComponent = dataBindingComponent,
-            appExecutors = appExecutors,
-            showFullName = true
+            appExecutors = appExecutors
         ) { repo ->
             navigationController.navigateToRepo(
                 owner = repo.owner.login,

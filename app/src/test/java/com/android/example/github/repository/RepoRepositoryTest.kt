@@ -6,7 +6,7 @@ import android.arch.lifecycle.Observer
 import com.android.example.github.api.ApiResponse
 import com.android.example.github.api.GithubService
 import com.android.example.github.api.RepoSearchResponse
-import com.android.example.github.db.GithubDb
+import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
 import com.android.example.github.util.AbsentLiveData
 import com.android.example.github.util.ApiUtil.successCall
@@ -47,7 +47,7 @@ class RepoRepositoryTest {
 
     @Before
     fun init() {
-        val db = mock(GithubDb::class.java)
+        val db = mock(AppDatabase::class.java)
         `when`(db.repoDao()).thenReturn(dao)
         `when`(db.runInTransaction(ArgumentMatchers.any())).thenCallRealMethod()
         repository = RepoRepository(InstantAppExecutors(), db, dao, service)

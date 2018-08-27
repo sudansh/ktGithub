@@ -20,7 +20,7 @@ import com.android.example.github.vo.User
     version = 3,
     exportSchema = false
 )
-abstract class GithubDb : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
 

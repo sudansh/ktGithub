@@ -7,7 +7,7 @@ import com.android.example.github.api.ApiErrorResponse
 import com.android.example.github.api.ApiResponse
 import com.android.example.github.api.ApiSuccessResponse
 import com.android.example.github.api.GithubService
-import com.android.example.github.db.GithubDb
+import com.android.example.github.db.AppDatabase
 import com.android.example.github.vo.RepoSearchResult
 import com.android.example.github.vo.Resource
 import java.io.IOException
@@ -18,7 +18,7 @@ import java.io.IOException
 class FetchNextSearchPageTask constructor(
     private val query: String,
     private val githubService: GithubService,
-    private val db: GithubDb
+    private val db: AppDatabase
 ) : Runnable {
     private val _liveData = MutableLiveData<Resource<Boolean>>()
     val liveData: LiveData<Resource<Boolean>> = _liveData

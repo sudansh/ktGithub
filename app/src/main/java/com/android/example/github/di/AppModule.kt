@@ -3,7 +3,7 @@ package com.android.example.github.di
 import android.app.Application
 import android.arch.persistence.room.Room
 import com.android.example.github.api.GithubService
-import com.android.example.github.db.GithubDb
+import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
 import com.android.example.github.db.UserDao
 import com.android.example.github.util.LiveDataCallAdapterFactory
@@ -28,21 +28,21 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideDb(app: Application): GithubDb {
-        return Room.databaseBuilder(app, GithubDb::class.java, "github.db")
+    fun provideDb(app: Application): AppDatabase {
+        return Room.databaseBuilder(app, AppDatabase::class.java, "github.db")
             .fallbackToDestructiveMigration()
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideUserDao(db: GithubDb): UserDao {
+    fun provideUserDao(db: AppDatabase): UserDao {
         return db.userDao()
     }
 
     @Singleton
     @Provides
-    fun provideRepoDao(db: GithubDb): RepoDao {
+    fun provideRepoDao(db: AppDatabase): RepoDao {
         return db.repoDao()
     }
 }

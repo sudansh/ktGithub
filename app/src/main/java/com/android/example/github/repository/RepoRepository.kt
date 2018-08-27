@@ -6,7 +6,7 @@ import com.android.example.github.AppExecutors
 import com.android.example.github.api.ApiSuccessResponse
 import com.android.example.github.api.GithubService
 import com.android.example.github.api.RepoSearchResponse
-import com.android.example.github.db.GithubDb
+import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
 import com.android.example.github.testing.OpenForTesting
 import com.android.example.github.util.AbsentLiveData
@@ -30,7 +30,7 @@ import javax.inject.Singleton
 @OpenForTesting
 class RepoRepository @Inject constructor(
     private val appExecutors: AppExecutors,
-    private val db: GithubDb,
+    private val db: AppDatabase,
     private val repoDao: RepoDao,
     private val githubService: GithubService
 ) {

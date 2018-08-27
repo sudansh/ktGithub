@@ -4,7 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
 import com.android.example.github.api.GithubService
 import com.android.example.github.api.RepoSearchResponse
-import com.android.example.github.db.GithubDb
+import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
 import com.android.example.github.util.TestUtil
 import com.android.example.github.util.mock
@@ -35,7 +35,7 @@ class FetchNextSearchPageTaskTest {
 
     private lateinit var service: GithubService
 
-    private lateinit var db: GithubDb
+    private lateinit var db: AppDatabase
 
     private lateinit var repoDao: RepoDao
 
@@ -46,7 +46,7 @@ class FetchNextSearchPageTaskTest {
     @Before
     fun init() {
         service = mock(GithubService::class.java)
-        db = mock(GithubDb::class.java)
+        db = mock(AppDatabase::class.java)
         repoDao = mock(RepoDao::class.java)
         `when`(db.repoDao()).thenReturn(repoDao)
         task = FetchNextSearchPageTask("foo", service, db)

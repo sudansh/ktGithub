@@ -25,7 +25,6 @@ allOpen {
 }
 android {
     compileSdkVersion build_versions.target_sdk
-    buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId "com.android.example.github"
         minSdkVersion build_versions.min_sdk
@@ -94,10 +93,10 @@ dependencies {
     })
     testImplementation deps.mockito.core
 
-    androidTestImplementation deps.support.app_compat
-    androidTestImplementation deps.support.recyclerview
-    androidTestImplementation deps.support.cardview
-    androidTestImplementation deps.support.design
+//    androidTestImplementation deps.support.app_compat
+//    androidTestImplementation deps.support.recyclerview
+//    androidTestImplementation deps.support.cardview
+//    androidTestImplementation deps.support.design
 
     androidTestImplementation(deps.espresso.core, {
         exclude group: 'com.android.support', module: 'support-annotations'

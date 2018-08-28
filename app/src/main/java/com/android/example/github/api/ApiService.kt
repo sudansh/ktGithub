@@ -12,7 +12,7 @@ import retrofit2.http.Query
 /**
  * REST API access points
  */
-interface GithubService {
+interface ApiService {
     @GET("users/{login}")
     fun getUser(@Path("login") login: String): LiveData<ApiResponse<User>>
 

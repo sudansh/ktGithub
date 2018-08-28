@@ -2,7 +2,7 @@ package com.android.example.github.repository
 
 import android.arch.lifecycle.LiveData
 import com.android.example.github.AppExecutors
-import com.android.example.github.api.GithubService
+import com.android.example.github.api.ApiService
 import com.android.example.github.db.UserDao
 import com.android.example.github.testing.OpenForTesting
 import com.android.example.github.vo.Resource
@@ -18,7 +18,7 @@ import javax.inject.Singleton
 class UserRepository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val userDao: UserDao,
-    private val githubService: GithubService
+    private val apiService: ApiService
 ) {
 
     fun loadUser(login: String): LiveData<Resource<User>> {
@@ -31,7 +31,7 @@ class UserRepository @Inject constructor(
 
             override fun loadFromDb() = userDao.findByLogin(login)
 
-            override fun createCall() = githubService.getUser(login)
+            override fun createCall() = apiService.getUser(login)
         }.asLiveData()
     }
 }

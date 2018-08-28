@@ -20,12 +20,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @RunWith(JUnit4::class)
-class GithubServiceTest {
+class ApiServiceTest {
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var service: GithubService
+    private lateinit var service: ApiService
 
     private lateinit var mockWebServer: MockWebServer
 
@@ -37,7 +37,7 @@ class GithubServiceTest {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
-            .create(GithubService::class.java)
+            .create(ApiService::class.java)
     }
 
     @After

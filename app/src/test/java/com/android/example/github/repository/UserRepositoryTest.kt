@@ -3,7 +3,7 @@ package com.android.example.github.repository
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import com.android.example.github.api.GithubService
+import com.android.example.github.api.ApiService
 import com.android.example.github.db.UserDao
 import com.android.example.github.util.ApiUtil
 import com.android.example.github.util.InstantAppExecutors
@@ -23,7 +23,7 @@ import org.mockito.Mockito.verify
 @RunWith(JUnit4::class)
 class UserRepositoryTest {
     private val userDao = mock(UserDao::class.java)
-    private val githubService = mock(GithubService::class.java)
+    private val githubService = mock(ApiService::class.java)
     private val repo = UserRepository(InstantAppExecutors(), userDao, githubService)
 
     @Rule

@@ -2,7 +2,7 @@ package com.android.example.github.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
-import com.android.example.github.api.GithubService
+import com.android.example.github.api.ApiService
 import com.android.example.github.api.RepoSearchResponse
 import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
@@ -33,7 +33,7 @@ class FetchNextSearchPageTaskTest {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var service: GithubService
+    private lateinit var service: ApiService
 
     private lateinit var db: AppDatabase
 
@@ -45,7 +45,7 @@ class FetchNextSearchPageTaskTest {
 
     @Before
     fun init() {
-        service = mock(GithubService::class.java)
+        service = mock(ApiService::class.java)
         db = mock(AppDatabase::class.java)
         repoDao = mock(RepoDao::class.java)
         `when`(db.repoDao()).thenReturn(repoDao)

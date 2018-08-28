@@ -2,7 +2,7 @@ package com.android.example.github.di
 
 import android.app.Application
 import android.arch.persistence.room.Room
-import com.android.example.github.api.GithubService
+import com.android.example.github.api.ApiService
 import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
 import com.android.example.github.db.UserDao
@@ -17,13 +17,13 @@ import javax.inject.Singleton
 class AppModule {
     @Singleton
     @Provides
-    fun provideGithubService(): GithubService {
+    fun provideGithubService(): ApiService {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
-            .create(GithubService::class.java)
+            .create(ApiService::class.java)
     }
 
     @Singleton

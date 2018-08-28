@@ -6,7 +6,7 @@ import com.android.example.github.api.ApiEmptyResponse
 import com.android.example.github.api.ApiErrorResponse
 import com.android.example.github.api.ApiResponse
 import com.android.example.github.api.ApiSuccessResponse
-import com.android.example.github.api.GithubService
+import com.android.example.github.api.ApiService
 import com.android.example.github.db.AppDatabase
 import com.android.example.github.vo.RepoSearchResult
 import com.android.example.github.vo.Resource
@@ -17,7 +17,7 @@ import java.io.IOException
  */
 class FetchNextSearchPageTask constructor(
     private val query: String,
-    private val githubService: GithubService,
+    private val apiService: ApiService,
     private val db: AppDatabase
 ) : Runnable {
     private val _liveData = MutableLiveData<Resource<Boolean>>()
@@ -35,7 +35,7 @@ class FetchNextSearchPageTask constructor(
             return
         }
         val newValue = try {
-            val response = githubService.searchRepos(query, nextPage).execute()
+            val response = apiService.searchRepos(query, nextPage).execute()
             val apiResponse = ApiResponse.create(response)
             when (apiResponse) {
                 is ApiSuccessResponse -> {

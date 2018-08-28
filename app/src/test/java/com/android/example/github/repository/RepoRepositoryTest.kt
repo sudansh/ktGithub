@@ -4,7 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import com.android.example.github.api.ApiResponse
-import com.android.example.github.api.GithubService
+import com.android.example.github.api.ApiService
 import com.android.example.github.api.RepoSearchResponse
 import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
@@ -40,7 +40,7 @@ import retrofit2.Response
 class RepoRepositoryTest {
     private lateinit var repository: RepoRepository
     private val dao = mock(RepoDao::class.java)
-    private val service = mock(GithubService::class.java)
+    private val service = mock(ApiService::class.java)
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()

@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import com.android.example.github.AppExecutors
 import com.android.example.github.api.ApiSuccessResponse
-import com.android.example.github.api.GithubService
+import com.android.example.github.api.ApiService
 import com.android.example.github.api.RepoSearchResponse
 import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
@@ -32,7 +32,7 @@ class RepoRepository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val db: AppDatabase,
     private val repoDao: RepoDao,
-    private val githubService: GithubService
+    private val apiService: ApiService
 ) {
 
     private val repoListRateLimit = RateLimiter<String>(10, TimeUnit.MINUTES)
@@ -49,7 +49,7 @@ class RepoRepository @Inject constructor(
 
             override fun loadFromDb() = repoDao.loadRepositories(owner)
 
-            override fun createCall() = githubService.getRepos(owner)
+            override fun createCall() = apiService.getRepos(owner)
 
             override fun onFetchFailed() {
                 repoListRateLimit.reset(owner)
@@ -70,7 +70,7 @@ class RepoRepository @Inject constructor(
                 name = name
             )
 
-            override fun createCall() = githubService.getRepo(
+            override fun createCall() = apiService.getRepo(
                 owner = owner,
                 name = name
             )
@@ -105,14 +105,14 @@ class RepoRepository @Inject constructor(
 
             override fun loadFromDb() = repoDao.loadContributors(owner, name)
 
-            override fun createCall() = githubService.getContributors(owner, name)
+            override fun createCall() = apiService.getContributors(owner, name)
         }.asLiveData()
     }
 
     fun searchNextPage(query: String): LiveData<Resource<Boolean>> {
         val fetchNextSearchPageTask = FetchNextSearchPageTask(
             query = query,
-            githubService = githubService,
+            apiService = apiService,
             db = db
         )
         appExecutors.networkIO().execute(fetchNextSearchPageTask)
@@ -152,7 +152,7 @@ class RepoRepository @Inject constructor(
                 }
             }
 
-            override fun createCall() = githubService.searchRepos(query)
+            override fun createCall() = apiService.searchRepos(query)
 
             override fun processResponse(response: ApiSuccessResponse<RepoSearchResponse>)
                     : RepoSearchResponse {

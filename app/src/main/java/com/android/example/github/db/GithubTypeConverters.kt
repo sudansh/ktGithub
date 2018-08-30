@@ -1,7 +1,7 @@
 package com.android.example.github.db
 
 import android.arch.persistence.room.TypeConverter
-import timber.log.Timber
+import android.util.Log
 
 object GithubTypeConverters {
     @TypeConverter
@@ -12,7 +12,7 @@ object GithubTypeConverters {
                 try {
                     it.toInt()
                 } catch (ex: NumberFormatException) {
-                    Timber.e(ex, "Cannot convert $it to number")
+                    Log.e("GithubConverter", "Cannot convert $it to number")
                     null
                 }
             }

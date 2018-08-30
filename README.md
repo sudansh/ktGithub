@@ -66,7 +66,6 @@ The project uses [MockWebServer][mockwebserver] project to test REST api interac
 * [Dagger 2][dagger2] for dependency injection
 * [Retrofit][retrofit] for REST api communication
 * [Glide][glide] for image loading
-* [Timber][timber] for logging
 * [espresso][espresso] for UI tests
 * [mockito][mockito] for mocking in tests
 
@@ -79,5 +78,4 @@ The project uses [MockWebServer][mockwebserver] project to test REST api interac
 [dagger2]: https://google.github.io/dagger
 [retrofit]: http://square.github.io/retrofit
 [glide]: https://github.com/bumptech/glide
-[timber]: https://github.com/JakeWharton/timber
 [mockito]: http://site.mockito.org

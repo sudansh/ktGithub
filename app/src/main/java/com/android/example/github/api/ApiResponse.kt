@@ -1,7 +1,7 @@
 package com.android.example.github.api
 
+import android.util.Log
 import retrofit2.Response
-import timber.log.Timber
 import java.util.regex.Pattern
 
 /**
@@ -22,8 +22,8 @@ sealed class ApiResponse<T> {
                     ApiEmptyResponse()
                 } else {
                     ApiSuccessResponse(
-                        body = body,
-                        linkHeader = response.headers()?.get("link")
+                            body = body,
+                            linkHeader = response.headers()?.get("link")
                     )
                 }
             } else {
@@ -45,12 +45,12 @@ sealed class ApiResponse<T> {
 class ApiEmptyResponse<T> : ApiResponse<T>()
 
 data class ApiSuccessResponse<T>(
-    val body: T,
-    val links: Map<String, String>
+        val body: T,
+        val links: Map<String, String>
 ) : ApiResponse<T>() {
     constructor(body: T, linkHeader: String?) : this(
-        body = body,
-        links = linkHeader?.extractLinks() ?: emptyMap()
+            body = body,
+            links = linkHeader?.extractLinks() ?: emptyMap()
     )
 
     val nextPage: Int? by lazy(LazyThreadSafetyMode.NONE) {
@@ -62,7 +62,7 @@ data class ApiSuccessResponse<T>(
                 try {
                     Integer.parseInt(matcher.group(1))
                 } catch (ex: NumberFormatException) {
-                    Timber.w("cannot parse next page from %s", next)
+                    Log.w("", "cannot parse next page from $next")
                     null
                 }
             }

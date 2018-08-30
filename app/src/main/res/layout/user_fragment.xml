@@ -7,15 +7,15 @@
 
         <variable
             name="user"
-            type="com.android.example.github.vo.User" />
+            type="com.sudansh.github.vo.User" />
 
         <variable
             name="userResource"
-            type="com.android.example.github.vo.Resource" />
+            type="com.sudansh.github.vo.Resource" />
 
         <variable
             name="retryCallback"
-            type="com.android.example.github.ui.common.RetryCallback" />
+            type="com.sudansh.github.ui.common.RetryCallback" />
     </data>
 
     <android.support.constraint.ConstraintLayout

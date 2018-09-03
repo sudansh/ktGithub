@@ -10,8 +10,7 @@ import org.junit.Rule
 import java.util.concurrent.TimeUnit
 
 abstract class DbTest {
-    @Rule
-    @JvmField
+    @get:Rule
     val countingTaskExecutorRule = CountingTaskExecutorRule()
     private lateinit var _db: AppDatabase
     val db: AppDatabase
@@ -20,8 +19,8 @@ abstract class DbTest {
     @Before
     fun initDb() {
         _db = Room.inMemoryDatabaseBuilder(
-            InstrumentationRegistry.getContext(),
-            AppDatabase::class.java
+                InstrumentationRegistry.getContext(),
+                AppDatabase::class.java
         ).build()
     }
 

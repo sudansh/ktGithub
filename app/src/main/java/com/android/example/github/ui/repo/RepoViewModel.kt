@@ -18,17 +18,17 @@ class RepoViewModel @Inject constructor(repository: RepoRepository) : ViewModel(
     val repoId: LiveData<RepoId>
         get() = _repoId
     val repo: LiveData<Resource<Repo>> = Transformations
-        .switchMap(_repoId) { input ->
-            input.ifExists { owner, name ->
-                repository.loadRepo(owner, name)
+            .switchMap(_repoId) { input ->
+                input.ifExists { owner, name ->
+                    repository.loadRepo(owner, name)
+                }
             }
-        }
     val contributors: LiveData<Resource<List<Contributor>>> = Transformations
-        .switchMap(_repoId) { input ->
-            input.ifExists { owner, name ->
-                repository.loadContributors(owner, name)
+            .switchMap(_repoId) { input ->
+                input.ifExists { owner, name ->
+                    repository.loadContributors(owner, name)
+                }
             }
-        }
 
     fun retry() {
         val owner = _repoId.value?.owner

@@ -15,17 +15,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.never
-import org.mockito.Mockito.reset
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyNoMoreInteractions
+import org.mockito.Mockito.*
 
 @RunWith(JUnit4::class)
 class SearchViewModelTest {
-    @Rule
-    @JvmField
+    @get:Rule
     val instantExecutor = InstantTaskExecutorRule()
     private val repository = mock(RepoRepository::class.java)
     private lateinit var viewModel: SearchViewModel

@@ -3,17 +3,11 @@ package com.android.example.github.ui.search
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.DataBindingComponent
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.pressKey
-import android.support.test.espresso.action.ViewActions.typeText
+import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers
-import android.support.test.espresso.matcher.ViewMatchers.hasDescendant
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.matcher.ViewMatchers.withText
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
@@ -22,12 +16,7 @@ import com.android.example.github.R
 import com.android.example.github.binding.FragmentBindingAdapters
 import com.android.example.github.testing.SingleFragmentActivity
 import com.android.example.github.ui.common.NavigationController
-import com.android.example.github.util.CountingAppExecutorsRule
-import com.android.example.github.util.EspressoTestUtil
-import com.android.example.github.util.RecyclerViewMatcher
-import com.android.example.github.util.TaskExecutorWithIdlingResourceRule
-import com.android.example.github.util.TestUtil
-import com.android.example.github.util.ViewModelUtil
+import com.android.example.github.util.*
 import com.android.example.github.vo.Repo
 import com.android.example.github.vo.Resource
 import org.hamcrest.CoreMatchers.not
@@ -35,22 +24,15 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.doNothing
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 
 @RunWith(AndroidJUnit4::class)
 class SearchFragmentTest {
-    @Rule
-    @JvmField
+    @get:Rule
     val activityRule = ActivityTestRule(SingleFragmentActivity::class.java, true, true)
-    @Rule
-    @JvmField
+    @get:Rule
     val executorRule = TaskExecutorWithIdlingResourceRule()
-    @Rule
-    @JvmField
+    @get:Rule
     val countingAppExecutors = CountingAppExecutorsRule()
 
     private lateinit var mockBindingAdapter: FragmentBindingAdapters

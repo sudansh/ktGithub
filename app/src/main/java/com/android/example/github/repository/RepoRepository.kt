@@ -3,8 +3,8 @@ package com.android.example.github.repository
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import com.android.example.github.AppExecutors
-import com.android.example.github.api.ApiSuccessResponse
 import com.android.example.github.api.ApiService
+import com.android.example.github.api.ApiSuccessResponse
 import com.android.example.github.api.RepoSearchResponse
 import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
@@ -29,10 +29,10 @@ import javax.inject.Singleton
 @Singleton
 @OpenForTesting
 class RepoRepository @Inject constructor(
-    private val appExecutors: AppExecutors,
-    private val db: AppDatabase,
-    private val repoDao: RepoDao,
-    private val apiService: ApiService
+        private val appExecutors: AppExecutors,
+        private val db: AppDatabase,
+        private val repoDao: RepoDao,
+        private val apiService: ApiService
 ) {
 
     private val repoListRateLimit = RateLimiter<String>(10, TimeUnit.MINUTES)
@@ -66,13 +66,13 @@ class RepoRepository @Inject constructor(
             override fun shouldFetch(data: Repo?) = data == null
 
             override fun loadFromDb() = repoDao.load(
-                ownerLogin = owner,
-                name = name
+                    ownerLogin = owner,
+                    name = name
             )
 
             override fun createCall() = apiService.getRepo(
-                owner = owner,
-                name = name
+                    owner = owner,
+                    name = name
             )
         }.asLiveData()
     }
@@ -86,14 +86,14 @@ class RepoRepository @Inject constructor(
                 }
                 db.runInTransaction {
                     repoDao.createRepoIfNotExists(
-                        Repo(
-                            id = Repo.UNKNOWN_ID,
-                            name = name,
-                            fullName = "$owner/$name",
-                            description = "",
-                            owner = Repo.Owner(owner, null),
-                            stars = 0
-                        )
+                            Repo(
+                                    id = Repo.UNKNOWN_ID,
+                                    name = name,
+                                    fullName = "$owner/$name",
+                                    description = "",
+                                    owner = Repo.Owner(owner, null),
+                                    stars = 0
+                            )
                     )
                     repoDao.insertContributors(item)
                 }
@@ -111,9 +111,9 @@ class RepoRepository @Inject constructor(
 
     fun searchNextPage(query: String): LiveData<Resource<Boolean>> {
         val fetchNextSearchPageTask = FetchNextSearchPageTask(
-            query = query,
-            apiService = apiService,
-            db = db
+                query = query,
+                apiService = apiService,
+                db = db
         )
         appExecutors.networkIO().execute(fetchNextSearchPageTask)
         return fetchNextSearchPageTask.liveData
@@ -125,10 +125,10 @@ class RepoRepository @Inject constructor(
             override fun saveCallResult(item: RepoSearchResponse) {
                 val repoIds = item.items.map { it.id }
                 val repoSearchResult = RepoSearchResult(
-                    query = query,
-                    repoIds = repoIds,
-                    totalCount = item.total,
-                    next = item.nextPage
+                        query = query,
+                        repoIds = repoIds,
+                        totalCount = item.total,
+                        next = item.nextPage
                 )
                 db.beginTransaction()
                 try {

@@ -1,17 +1,14 @@
 package com.android.example.github.ui.search
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.*
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
 import com.android.example.github.repository.RepoRepository
 import com.android.example.github.testing.OpenForTesting
 import com.android.example.github.util.AbsentLiveData
 import com.android.example.github.vo.Repo
 import com.android.example.github.vo.Resource
 import com.android.example.github.vo.Status
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 
 @OpenForTesting
@@ -21,13 +18,13 @@ class SearchViewModel @Inject constructor(repoRepository: RepoRepository) : View
     private val nextPageHandler = NextPageHandler(repoRepository)
 
     val results: LiveData<Resource<List<Repo>>> = Transformations
-        .switchMap(query) { search ->
-            if (search.isNullOrBlank()) {
-                AbsentLiveData.create()
-            } else {
-                repoRepository.search(search)
+            .switchMap(query) { search ->
+                if (search.isNullOrBlank()) {
+                    AbsentLiveData.create()
+                } else {
+                    repoRepository.search(search)
+                }
             }
-        }
 
     val loadMoreStatus: LiveData<LoadMoreState>
         get() = nextPageHandler.loadMoreState
@@ -88,8 +85,8 @@ class SearchViewModel @Inject constructor(repoRepository: RepoRepository) : View
             this.query = query
             nextPageLiveData = repository.searchNextPage(query)
             loadMoreState.value = LoadMoreState(
-                isRunning = true,
-                errorMessage = null
+                    isRunning = true,
+                    errorMessage = null
             )
             nextPageLiveData?.observeForever(this)
         }
@@ -103,20 +100,20 @@ class SearchViewModel @Inject constructor(repoRepository: RepoRepository) : View
                         _hasMore = result.data == true
                         unregister()
                         loadMoreState.setValue(
-                            LoadMoreState(
-                                isRunning = false,
-                                errorMessage = null
-                            )
+                                LoadMoreState(
+                                        isRunning = false,
+                                        errorMessage = null
+                                )
                         )
                     }
                     Status.ERROR -> {
                         _hasMore = true
                         unregister()
                         loadMoreState.setValue(
-                            LoadMoreState(
-                                isRunning = false,
-                                errorMessage = result.message
-                            )
+                                LoadMoreState(
+                                        isRunning = false,
+                                        errorMessage = result.message
+                                )
                         )
                     }
                     Status.LOADING -> {
@@ -138,8 +135,8 @@ class SearchViewModel @Inject constructor(repoRepository: RepoRepository) : View
             unregister()
             _hasMore = true
             loadMoreState.value = LoadMoreState(
-                isRunning = false,
-                errorMessage = null
+                    isRunning = false,
+                    errorMessage = null
             )
         }
     }

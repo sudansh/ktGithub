@@ -21,8 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @RunWith(JUnit4::class)
 class ApiServiceTest {
-    @Rule
-    @JvmField
+    @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var service: ApiService

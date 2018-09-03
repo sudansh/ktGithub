@@ -18,10 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyNoMoreInteractions
+import org.mockito.Mockito.*
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
@@ -29,8 +26,7 @@ import java.io.IOException
 @RunWith(JUnit4::class)
 class FetchNextSearchPageTaskTest {
 
-    @Rule
-    @JvmField
+    @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var service: ApiService

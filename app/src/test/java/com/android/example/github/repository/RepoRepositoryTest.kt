@@ -8,12 +8,8 @@ import com.android.example.github.api.ApiService
 import com.android.example.github.api.RepoSearchResponse
 import com.android.example.github.db.AppDatabase
 import com.android.example.github.db.RepoDao
-import com.android.example.github.util.AbsentLiveData
+import com.android.example.github.util.*
 import com.android.example.github.util.ApiUtil.successCall
-import com.android.example.github.util.InstantAppExecutors
-import com.android.example.github.util.TestUtil
-import com.android.example.github.util.argumentCaptor
-import com.android.example.github.util.mock
 import com.android.example.github.vo.Contributor
 import com.android.example.github.vo.Repo
 import com.android.example.github.vo.RepoSearchResult
@@ -26,14 +22,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.anyList
-import org.mockito.Mockito.anyString
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.never
-import org.mockito.Mockito.reset
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyNoMoreInteractions
+import org.mockito.Mockito.*
 import retrofit2.Response
 
 @RunWith(JUnit4::class)
@@ -41,8 +30,7 @@ class RepoRepositoryTest {
     private lateinit var repository: RepoRepository
     private val dao = mock(RepoDao::class.java)
     private val service = mock(ApiService::class.java)
-    @Rule
-    @JvmField
+    @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before

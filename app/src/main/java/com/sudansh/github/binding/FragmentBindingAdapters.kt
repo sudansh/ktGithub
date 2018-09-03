@@ -3,10 +3,8 @@ package com.sudansh.github.binding
 import android.databinding.BindingAdapter
 import android.support.v4.app.Fragment
 import android.widget.ImageView
-import com.sudansh.github.testing.OpenForTesting
-
 import com.bumptech.glide.Glide
-
+import com.sudansh.github.testing.OpenForTesting
 import javax.inject.Inject
 
 /**
@@ -14,8 +12,8 @@ import javax.inject.Inject
  */
 @OpenForTesting
 class FragmentBindingAdapters @Inject constructor(val fragment: Fragment) {
-    @BindingAdapter("imageUrl")
-    fun bindImage(imageView: ImageView, url: String?) {
-        Glide.with(fragment).load(url).into(imageView)
-    }
+	@BindingAdapter("imageUrl")
+	fun bindImage(imageView: ImageView, url: String?) {
+		Glide.with(fragment).load(url).into(imageView)
+	}
 }

@@ -10,12 +10,12 @@ import dagger.android.ContributesAndroidInjector
 @Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
-    @ContributesAndroidInjector
-    abstract fun contributeRepoFragment(): RepoFragment
+	@ContributesAndroidInjector
+	abstract fun contributeRepoFragment(): RepoFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeUserFragment(): UserFragment
+	@ContributesAndroidInjector
+	abstract fun contributeUserFragment(): UserFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeSearchFragment(): SearchFragment
+	@ContributesAndroidInjector
+	abstract fun contributeSearchFragment(): SearchFragment
 }

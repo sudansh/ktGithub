@@ -15,34 +15,34 @@ import javax.inject.Singleton
 
 @Module
 class AppModule {
-    @Singleton
-    @Provides
-    fun provideGithubService(): ApiService {
-        return Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(LiveDataCallAdapterFactory())
-            .build()
-            .create(ApiService::class.java)
-    }
+	@Singleton
+	@Provides
+	fun provideGithubService(): ApiService {
+		return Retrofit.Builder()
+			.baseUrl("https://api.github.com/")
+			.addConverterFactory(GsonConverterFactory.create())
+			.addCallAdapterFactory(LiveDataCallAdapterFactory())
+			.build()
+			.create(ApiService::class.java)
+	}
 
-    @Singleton
-    @Provides
-    fun provideDb(app: Application): AppDatabase {
-        return Room.databaseBuilder(app, AppDatabase::class.java, "github.db")
-            .fallbackToDestructiveMigration()
-            .build()
-    }
+	@Singleton
+	@Provides
+	fun provideDb(app: Application): AppDatabase {
+		return Room.databaseBuilder(app, AppDatabase::class.java, "github.db")
+			.fallbackToDestructiveMigration()
+			.build()
+	}
 
-    @Singleton
-    @Provides
-    fun provideUserDao(db: AppDatabase): UserDao {
-        return db.userDao()
-    }
+	@Singleton
+	@Provides
+	fun provideUserDao(db: AppDatabase): UserDao {
+		return db.userDao()
+	}
 
-    @Singleton
-    @Provides
-    fun provideRepoDao(db: AppDatabase): RepoDao {
-        return db.repoDao()
-    }
+	@Singleton
+	@Provides
+	fun provideRepoDao(db: AppDatabase): RepoDao {
+		return db.repoDao()
+	}
 }

@@ -16,22 +16,22 @@ import javax.inject.Singleton
 @OpenForTesting
 @Singleton
 class UserRepository @Inject constructor(
-    private val appExecutors: AppExecutors,
-    private val userDao: UserDao,
-    private val apiService: ApiService
+	private val appExecutors: AppExecutors,
+	private val userDao: UserDao,
+	private val apiService: ApiService
 ) {
 
-    fun loadUser(login: String): LiveData<Resource<User>> {
-        return object : NetworkBoundResource<User, User>(appExecutors) {
-            override fun saveCallResult(item: User) {
-                userDao.insert(item)
-            }
+	fun loadUser(login: String): LiveData<Resource<User>> {
+		return object : NetworkBoundResource<User, User>(appExecutors) {
+			override fun saveCallResult(item: User) {
+				userDao.insert(item)
+			}
 
-            override fun shouldFetch(data: User?) = data == null
+			override fun shouldFetch(data: User?) = data == null
 
-            override fun loadFromDb() = userDao.findByLogin(login)
+			override fun loadFromDb() = userDao.findByLogin(login)
 
-            override fun createCall() = apiService.getUser(login)
-        }.asLiveData()
-    }
+			override fun createCall() = apiService.getUser(login)
+		}.asLiveData()
+	}
 }

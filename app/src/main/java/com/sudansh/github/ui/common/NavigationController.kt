@@ -13,31 +13,31 @@ import javax.inject.Inject
  */
 @OpenForTesting
 class NavigationController @Inject constructor(mainActivity: MainActivity) {
-    private val containerId = R.id.container
-    private val fragmentManager = mainActivity.supportFragmentManager
+	private val containerId = R.id.container
+	private val fragmentManager = mainActivity.supportFragmentManager
 
-    fun navigateToSearch() {
-        val searchFragment = SearchFragment()
-        fragmentManager.beginTransaction()
-            .replace(containerId, searchFragment)
-            .commitAllowingStateLoss()
-    }
+	fun navigateToSearch() {
+		val searchFragment = SearchFragment()
+		fragmentManager.beginTransaction()
+			.replace(containerId, searchFragment)
+			.commitAllowingStateLoss()
+	}
 
-    fun navigateToRepo(owner: String, name: String) {
-        val fragment = RepoFragment.create(owner, name)
-        val tag = "repo/$owner/$name"
-        fragmentManager.beginTransaction()
-            .replace(containerId, fragment, tag)
-            .addToBackStack(null)
-            .commitAllowingStateLoss()
-    }
+	fun navigateToRepo(owner: String, name: String) {
+		val fragment = RepoFragment.create(owner, name)
+		val tag = "repo/$owner/$name"
+		fragmentManager.beginTransaction()
+			.replace(containerId, fragment, tag)
+			.addToBackStack(null)
+			.commitAllowingStateLoss()
+	}
 
-    fun navigateToUser(login: String) {
-        val tag = "user/$login"
-        val userFragment = UserFragment.create(login)
-        fragmentManager.beginTransaction()
-            .replace(containerId, userFragment, tag)
-            .addToBackStack(null)
-            .commitAllowingStateLoss()
-    }
+	fun navigateToUser(login: String) {
+		val tag = "user/$login"
+		val userFragment = UserFragment.create(login)
+		fragmentManager.beginTransaction()
+			.replace(containerId, userFragment, tag)
+			.addToBackStack(null)
+			.commitAllowingStateLoss()
+	}
 }

@@ -12,9 +12,9 @@ import com.sudansh.github.vo.User
  */
 @Dao
 interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: User)
+	@Insert(onConflict = OnConflictStrategy.REPLACE)
+	fun insert(user: User)
 
-    @Query("SELECT * FROM user WHERE login = :login")
-    fun findByLogin(login: String): LiveData<User>
+	@Query("SELECT * FROM user WHERE login = :login")
+	fun findByLogin(login: String): LiveData<User>
 }

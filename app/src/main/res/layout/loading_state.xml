@@ -4,9 +4,9 @@
 
     <data>
 
-        <import type="com.android.example.github.vo.Resource" />
+        <import type="com.sudansh.github.vo.Resource" />
 
-        <import type="com.android.example.github.vo.Status" />
+        <import type="com.sudansh.github.vo.Status" />
 
         <variable
             name="resource"
@@ -14,7 +14,7 @@
 
         <variable
             name="callback"
-            type="com.android.example.github.ui.common.RetryCallback" />
+            type="com.sudansh.github.ui.common.RetryCallback" />
     </data>
 
     <LinearLayout

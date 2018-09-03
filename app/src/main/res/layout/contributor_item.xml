@@ -7,7 +7,7 @@
 
         <variable
             name="contributor"
-            type="com.android.example.github.vo.Contributor"
+            type="com.sudansh.github.vo.Contributor"
             tools:layout_conversion_absoluteX="0dp"
             tools:layout_conversion_absoluteY="-81dp"
             tools:layout_conversion_absoluteWidth="0dp"

@@ -1,0 +1,48 @@
+package com.sudansh.github.di
+
+import android.app.Application
+import android.arch.persistence.room.Room
+import com.sudansh.github.api.ApiService
+import com.sudansh.github.db.AppDatabase
+import com.sudansh.github.db.RepoDao
+import com.sudansh.github.db.UserDao
+import com.sudansh.github.util.LiveDataCallAdapterFactory
+import dagger.Module
+import dagger.Provides
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
+
+@Module
+class AppModule {
+    @Singleton
+    @Provides
+    fun provideGithubService(): ApiService {
+        return Retrofit.Builder()
+            .baseUrl("https://api.github.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .build()
+            .create(ApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDb(app: Application): AppDatabase {
+        return Room.databaseBuilder(app, AppDatabase::class.java, "github.db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserDao(db: AppDatabase): UserDao {
+        return db.userDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRepoDao(db: AppDatabase): RepoDao {
+        return db.repoDao()
+    }
+}

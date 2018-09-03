@@ -8,11 +8,11 @@ allOpen {
     annotation 'com.sudansh.github.testing.OpenClass'
 }
 android {
-    compileSdkVersion build_versions.target_sdk
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.sudansh.github"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.sudansh.github.util.AppTestRunner"
@@ -41,50 +41,68 @@ android {
         lintConfig rootProject.file('lint.xml')
     }
 }
-
+ext {
+    supportLib = "27.1.1"
+    koin_version = '0.9.3'
+    retrofit = '2.4.0'
+    room = '1.1.1'
+    mockito = '2.7.19'
+    lifecycle = "1.1.1"
+    espresso = '3.0.1'
+    stetho = '1.5.0'
+    dagger = '2.17'
+    glide = '4.8.0'
+}
 dependencies {
-    implementation deps.support.app_compat
-    implementation deps.support.recyclerview
-    implementation deps.support.cardview
-    implementation deps.support.design
-    implementation deps.room.runtime
-    implementation deps.lifecycle.runtime
-    implementation deps.lifecycle.extensions
-    implementation deps.lifecycle.java8
-    implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
-    implementation deps.glide.runtime
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android
-    implementation deps.dagger.android_support
-    implementation deps.constraint_layout
-    implementation deps.kotlin.stdlib
+    //android support
+    implementation "com.android.support:appcompat-v7:$supportLib"
+    implementation "com.android.support:design:$supportLib"
+    implementation "com.android.support:cardview-v7:$supportLib"
+    implementation "com.android.support:recyclerview-v7:$supportLib"
 
-    kapt deps.dagger.android_support_compiler
-    kapt deps.dagger.compiler
-    kapt deps.room.compiler
-    kapt deps.lifecycle.compiler
+    implementation "com.android.support.constraint:constraint-layout:1.1.3"
+    //room
+    implementation "android.arch.persistence.room:runtime:$room"
+    kapt "android.arch.persistence.room:compiler:$room"
 
-    testImplementation deps.junit
-    testImplementation deps.mock_web_server
-    testImplementation(deps.arch_core.testing, {
-        exclude group: 'com.android.support', module: 'support-compat'
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-core-utils'
-    })
-    testImplementation deps.mockito.core
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
-    androidTestImplementation(deps.espresso.core, {
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:$dagger"
+    implementation "com.google.dagger:dagger-android:$dagger"
+    implementation "com.google.dagger:dagger-android-support:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    kapt "com.google.dagger:dagger-android-processor:$dagger"
+
+    //lifecyle
+    implementation "android.arch.lifecycle:extensions:$lifecycle"
+    testImplementation "android.arch.core:core-testing:$lifecycle"
+    androidTestImplementation "android.arch.core:core-testing:$lifecycle"
+
+    //mockito
+    testImplementation 'junit:junit:4.12'
+    testImplementation "com.squareup.okhttp3:mockwebserver:3.11.0"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    androidTestImplementation "org.mockito:mockito-core:$mockito"
+
+    //espresso
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
     })
-    androidTestImplementation(deps.espresso.contrib, {
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
     })
-
-    androidTestImplementation deps.arch_core.testing
-    androidTestImplementation deps.dexmaker
-    androidTestImplementation deps.mockito.core, { exclude group: 'net.bytebuddy' }
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.2.0", {
+        exclude group: 'net.bytebuddy'
+    }
 }

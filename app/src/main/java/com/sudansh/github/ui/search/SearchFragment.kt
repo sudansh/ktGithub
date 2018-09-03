@@ -1,8 +1,6 @@
 package com.sudansh.github.ui.search
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
@@ -22,28 +20,21 @@ import com.sudansh.github.AppExecutors
 import com.sudansh.github.R
 import com.sudansh.github.binding.FragmentDataBindingComponent
 import com.sudansh.github.databinding.SearchFragmentBinding
-import com.sudansh.github.di.Injectable
 import com.sudansh.github.ui.common.NavigationController
 import com.sudansh.github.ui.common.RepoListAdapter
 import com.sudansh.github.ui.common.RetryCallback
-import javax.inject.Inject
+import com.sudansh.github.util.injectActivity
+import org.koin.android.ext.android.inject
 
-class SearchFragment : Fragment(), Injectable {
+class SearchFragment : Fragment() {
 
-	@Inject
-	lateinit var viewModelFactory: ViewModelProvider.Factory
-
-	@Inject
-	lateinit var navigationController: NavigationController
-
-	@Inject
-	lateinit var appExecutors: AppExecutors
-
+	val navigationController: NavigationController by injectActivity()
+	val appExecutors: AppExecutors by inject()
 	var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
 	lateinit var binding: SearchFragmentBinding
 	lateinit var adapter: RepoListAdapter
-	lateinit var searchViewModel: SearchViewModel
+	val searchViewModel: SearchViewModel by inject()
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -62,8 +53,6 @@ class SearchFragment : Fragment(), Injectable {
 
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
 		super.onActivityCreated(savedInstanceState)
-		searchViewModel = ViewModelProviders.of(this, viewModelFactory)
-			.get(SearchViewModel::class.java)
 		initRecyclerView()
 		val rvAdapter = RepoListAdapter(
 			dataBindingComponent = dataBindingComponent,

@@ -7,15 +7,13 @@ import com.sudansh.github.db.UserDao
 import com.sudansh.github.testing.OpenForTesting
 import com.sudansh.github.vo.Resource
 import com.sudansh.github.vo.User
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Repository that handles User objects.
  */
 @OpenForTesting
-@Singleton
-class UserRepository @Inject constructor(
+
+class UserRepository (
     private val appExecutors: AppExecutors,
     private val userDao: UserDao,
     private val apiService: ApiService

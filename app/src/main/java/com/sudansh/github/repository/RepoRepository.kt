@@ -3,8 +3,8 @@ package com.sudansh.github.repository
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import com.sudansh.github.AppExecutors
-import com.sudansh.github.api.ApiSuccessResponse
 import com.sudansh.github.api.ApiService
+import com.sudansh.github.api.ApiSuccessResponse
 import com.sudansh.github.api.RepoSearchResponse
 import com.sudansh.github.db.AppDatabase
 import com.sudansh.github.db.RepoDao
@@ -16,8 +16,6 @@ import com.sudansh.github.vo.Repo
 import com.sudansh.github.vo.RepoSearchResult
 import com.sudansh.github.vo.Resource
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Repository that handles Repo instances.
@@ -26,13 +24,13 @@ import javax.inject.Singleton
  * Repo - value object name
  * Repository - type of this class.
  */
-@Singleton
+
 @OpenForTesting
-class RepoRepository @Inject constructor(
-    private val appExecutors: AppExecutors,
-    private val db: AppDatabase,
-    private val repoDao: RepoDao,
-    private val apiService: ApiService
+class RepoRepository(
+        private val appExecutors: AppExecutors,
+        private val db: AppDatabase,
+        private val repoDao: RepoDao,
+        private val apiService: ApiService
 ) {
 
     private val repoListRateLimit = RateLimiter<String>(10, TimeUnit.MINUTES)
@@ -66,13 +64,13 @@ class RepoRepository @Inject constructor(
             override fun shouldFetch(data: Repo?) = data == null
 
             override fun loadFromDb() = repoDao.load(
-                ownerLogin = owner,
-                name = name
+                    ownerLogin = owner,
+                    name = name
             )
 
             override fun createCall() = apiService.getRepo(
-                owner = owner,
-                name = name
+                    owner = owner,
+                    name = name
             )
         }.asLiveData()
     }
@@ -86,14 +84,14 @@ class RepoRepository @Inject constructor(
                 }
                 db.runInTransaction {
                     repoDao.createRepoIfNotExists(
-                        Repo(
-                            id = Repo.UNKNOWN_ID,
-                            name = name,
-                            fullName = "$owner/$name",
-                            description = "",
-                            owner = Repo.Owner(owner, null),
-                            stars = 0
-                        )
+                            Repo(
+                                    id = Repo.UNKNOWN_ID,
+                                    name = name,
+                                    fullName = "$owner/$name",
+                                    description = "",
+                                    owner = Repo.Owner(owner, null),
+                                    stars = 0
+                            )
                     )
                     repoDao.insertContributors(item)
                 }
@@ -111,9 +109,9 @@ class RepoRepository @Inject constructor(
 
     fun searchNextPage(query: String): LiveData<Resource<Boolean>> {
         val fetchNextSearchPageTask = FetchNextSearchPageTask(
-            query = query,
-            apiService = apiService,
-            db = db
+                query = query,
+                apiService = apiService,
+                db = db
         )
         appExecutors.networkIO().execute(fetchNextSearchPageTask)
         return fetchNextSearchPageTask.liveData
@@ -125,10 +123,10 @@ class RepoRepository @Inject constructor(
             override fun saveCallResult(item: RepoSearchResponse) {
                 val repoIds = item.items.map { it.id }
                 val repoSearchResult = RepoSearchResult(
-                    query = query,
-                    repoIds = repoIds,
-                    totalCount = item.total,
-                    next = item.nextPage
+                        query = query,
+                        repoIds = repoIds,
+                        totalCount = item.total,
+                        next = item.nextPage
                 )
                 db.beginTransaction()
                 try {

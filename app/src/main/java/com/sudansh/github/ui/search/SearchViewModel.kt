@@ -11,11 +11,10 @@ import com.sudansh.github.util.AbsentLiveData
 import com.sudansh.github.vo.Repo
 import com.sudansh.github.vo.Resource
 import com.sudansh.github.vo.Status
-import java.util.Locale
-import javax.inject.Inject
+import java.util.*
 
 @OpenForTesting
-class SearchViewModel @Inject constructor(repoRepository: RepoRepository) : ViewModel() {
+class SearchViewModel (repoRepository: RepoRepository) : ViewModel() {
 
     private val query = MutableLiveData<String>()
     private val nextPageHandler = NextPageHandler(repoRepository)

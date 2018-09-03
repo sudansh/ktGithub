@@ -14,31 +14,31 @@ import com.sudansh.github.vo.Repo
  * A RecyclerView adapter for [Repo] class.
  */
 class RepoListAdapter(
-    private val dataBindingComponent: DataBindingComponent,
-    appExecutors: AppExecutors,
-    private val repoClickCallback: ((Repo) -> Unit)?
+        private val dataBindingComponent: DataBindingComponent,
+        appExecutors: AppExecutors,
+        private val repoClickCallback: ((Repo) -> Unit)?
 ) : DataBoundListAdapter<Repo, RepoItemBinding>(
-    appExecutors = appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<Repo>() {
-        override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {
-            return oldItem.owner == newItem.owner
-                    && oldItem.name == newItem.name
-        }
+        appExecutors = appExecutors,
+        diffCallback = object : DiffUtil.ItemCallback<Repo>() {
+            override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {
+                return oldItem.owner == newItem.owner
+                        && oldItem.name == newItem.name
+            }
 
-        override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean {
-            return oldItem.description == newItem.description
-                    && oldItem.stars == newItem.stars
+            override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean {
+                return oldItem.description == newItem.description
+                        && oldItem.stars == newItem.stars
+            }
         }
-    }
 ) {
 
     override fun createBinding(parent: ViewGroup): RepoItemBinding {
         val binding = DataBindingUtil.inflate<RepoItemBinding>(
-            LayoutInflater.from(parent.context),
-            R.layout.repo_item,
-            parent,
-            false,
-            dataBindingComponent
+                LayoutInflater.from(parent.context),
+                R.layout.repo_item,
+                parent,
+                false,
+                dataBindingComponent
         )
         binding.root.setOnClickListener {
             binding.repo?.let {

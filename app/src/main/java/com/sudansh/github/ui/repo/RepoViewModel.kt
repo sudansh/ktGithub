@@ -10,10 +10,9 @@ import com.sudansh.github.util.AbsentLiveData
 import com.sudansh.github.vo.Contributor
 import com.sudansh.github.vo.Repo
 import com.sudansh.github.vo.Resource
-import javax.inject.Inject
 
 @OpenForTesting
-class RepoViewModel @Inject constructor(repository: RepoRepository) : ViewModel() {
+class RepoViewModel (repository: RepoRepository) : ViewModel() {
     private val _repoId: MutableLiveData<RepoId> = MutableLiveData()
     val repoId: LiveData<RepoId>
         get() = _repoId

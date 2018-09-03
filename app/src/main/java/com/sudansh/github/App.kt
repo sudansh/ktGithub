@@ -1,21 +1,17 @@
 package com.sudansh.github
 
-import android.app.Activity
 import android.app.Application
-import com.sudansh.github.di.AppInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
+import com.sudansh.github.di.appModule
+import com.sudansh.github.di.localModule
+import com.sudansh.github.di.remoteModule
+import org.koin.android.ext.android.startKoin
 
-
-class App : Application(), HasActivityInjector {
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
-
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        AppInjector.init(this)
+		startKoin(listOf(appModule,
+						 localModule,
+						 remoteModule))
     }
 
-    override fun activityInjector() = dispatchingAndroidInjector
 }

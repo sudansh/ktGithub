@@ -1,8 +1,6 @@
 package com.sudansh.github.ui.user
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -14,25 +12,21 @@ import com.sudansh.github.AppExecutors
 import com.sudansh.github.R
 import com.sudansh.github.binding.FragmentDataBindingComponent
 import com.sudansh.github.databinding.UserFragmentBinding
-import com.sudansh.github.di.Injectable
 import com.sudansh.github.ui.common.NavigationController
 import com.sudansh.github.ui.common.RepoListAdapter
 import com.sudansh.github.ui.common.RetryCallback
-import javax.inject.Inject
+import com.sudansh.github.util.injectActivity
+import org.koin.android.ext.android.inject
 
-class UserFragment : Fragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject
-    lateinit var navigationController: NavigationController
-    @Inject
-    lateinit var appExecutors: AppExecutors
+class UserFragment : Fragment() {
 
+    val navigationController: NavigationController by injectActivity()
+    val appExecutors: AppExecutors by inject()
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    private lateinit var userViewModel: UserViewModel
     lateinit var binding: UserFragmentBinding
     lateinit var adapter: RepoListAdapter
+    val userViewModel: UserViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,9 +50,6 @@ class UserFragment : Fragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        userViewModel = ViewModelProviders.of(this, viewModelFactory)
-            .get(UserViewModel::class.java)
-
         userViewModel.setLogin(arguments?.getString(LOGIN_KEY))
 
         userViewModel.user.observe(this, Observer { userResource ->

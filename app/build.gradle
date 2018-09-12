@@ -18,9 +18,6 @@ android {
         testInstrumentationRunner "com.sudansh.github.util.AppTestRunner"
     }
     buildTypes {
-        debug {
-            testCoverageEnabled !project.hasProperty('android.injected.invoked.from.ide')
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

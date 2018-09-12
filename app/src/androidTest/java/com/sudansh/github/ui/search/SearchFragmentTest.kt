@@ -28,14 +28,11 @@ import org.mockito.Mockito.*
 
 @RunWith(AndroidJUnit4::class)
 class SearchFragmentTest {
-    @Rule
-    @JvmField
+    @get:Rule
     val activityRule = ActivityTestRule(SingleFragmentActivity::class.java, true, true)
-    @Rule
-    @JvmField
+    @get:Rule
     val executorRule = TaskExecutorWithIdlingResourceRule()
-    @Rule
-    @JvmField
+    @get:Rule
     val countingAppExecutors = CountingAppExecutorsRule()
 
     private lateinit var mockBindingAdapter: FragmentBindingAdapters

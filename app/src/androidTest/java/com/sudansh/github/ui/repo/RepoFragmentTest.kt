@@ -40,14 +40,11 @@ import org.mockito.Mockito.verify
 
 @RunWith(AndroidJUnit4::class)
 class RepoFragmentTest {
-    @Rule
-    @JvmField
+    @get:Rule
     val activityRule = ActivityTestRule(SingleFragmentActivity::class.java, true, true)
-    @Rule
-    @JvmField
+    @get:Rule
     val executorRule = TaskExecutorWithIdlingResourceRule()
-    @Rule
-    @JvmField
+    @get:Rule
     val countingAppExecutors = CountingAppExecutorsRule()
     private val repoLiveData = MutableLiveData<Resource<Repo>>()
     private val contributorsLiveData = MutableLiveData<Resource<List<Contributor>>>()

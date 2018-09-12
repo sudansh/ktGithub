@@ -15,11 +15,11 @@ import com.google.gson.annotations.SerializedName
 	)]
 )
 data class Contributor(
-	@field:SerializedName("login")
+	@SerializedName("login")
 	val login: String,
-	@field:SerializedName("contributions")
+	@SerializedName("contributions")
 	val contributions: Int,
-	@field:SerializedName("avatar_url")
+	@SerializedName("avatar_url")
 	val avatarUrl: String?
 ) {
 

@@ -17,23 +17,23 @@ import com.google.gson.annotations.SerializedName
 )
 data class Repo(
 	val id: Int,
-	@field:SerializedName("name")
+	@SerializedName("name")
 	val name: String,
-	@field:SerializedName("full_name")
+	@SerializedName("full_name")
 	val fullName: String,
-	@field:SerializedName("description")
+	@SerializedName("description")
 	val description: String?,
-	@field:SerializedName("owner")
-	@field:Embedded(prefix = "owner_")
+	@SerializedName("owner")
+	@Embedded(prefix = "owner_")
 	val owner: Owner,
-	@field:SerializedName("stargazers_count")
+	@SerializedName("stargazers_count")
 	val stars: Int
 ) {
 
 	data class Owner(
-		@field:SerializedName("login")
+		@SerializedName("login")
 		val login: String,
-		@field:SerializedName("url")
+		@SerializedName("url")
 		val url: String?
 	)
 

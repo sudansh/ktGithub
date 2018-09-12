@@ -41,8 +41,7 @@ class RepoRepositoryTest {
     private lateinit var repository: RepoRepository
     private val dao = mock(RepoDao::class.java)
     private val service = mock(ApiService::class.java)
-    @Rule
-    @JvmField
+    @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before

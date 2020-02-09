@@ -8,11 +8,11 @@ allOpen {
     annotation 'com.sudansh.github.testing.OpenClass'
 }
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.sudansh.github"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion 24
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.sudansh.github.util.AppTestRunner"
@@ -39,7 +39,7 @@ android {
     }
 }
 ext {
-    supportLib = "27.1.1"
+    supportLib = "28.0.0"
     retrofit = '2.4.0'
     room = '1.1.1'
     mockito = '2.7.19'
@@ -47,7 +47,7 @@ ext {
     espresso = '3.0.1'
     stetho = '1.5.0'
     dagger = '2.17'
-    glide = '4.8.0'
+    glide = '4.11.0'
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
